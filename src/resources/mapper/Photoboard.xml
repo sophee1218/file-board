@@ -69,17 +69,25 @@
 	
 	<update id="updatePhotoBoard" parameterType="int">
 		update photo_board
-		set 
+		<set>
 		<if test='pbTitle !=null and pbTitle""'>
-			and pbTitle = ${pbTitle}
+			 pbTitle = ${pbTitle},
 		</if>
 		<if test='pbContent !=null and pbContent""'>
-			and pbContent = ${pbContent}
+			pbContent = ${pbContent},
+		</if>
+		<if test='pbPhotoName !=null and pbPhotoName""'>
+			pbPhotoName = ${pbPhotoName},
 		</if>
 		<if test='pbPhotoPath !=null and pbPhotoPath""'>
-			and pbPhotoPath = ${pbPhotoPath}
+			pbPhotoPath = ${pbPhotoPath}
 		</if>
+		</set> 
 		where pb_num = ${pbNum}
 	
 	</update>
+	
+	<select id="selectPhotoBoard" parameterType="pb" resultType="pb">
+		slelect * from photo_board where pb_num = ${pbNum}
+	</select>
 </mapper>

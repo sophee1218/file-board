@@ -62,7 +62,7 @@ public class PhotoBoardDAOImpl implements PhotoBoardDAO {
 	}
 
 	@Override
-	public int updatePhotoBoard(PhotoBoardVO pb, MultipartFile file) {
+	public int updatePhotoBoard(PhotoBoardVO pb) {
 
 		try (SqlSession ss = ssf.openSession()) {
 			return ss.update("Photoboard.updatePhotoBoard", pb);

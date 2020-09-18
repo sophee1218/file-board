@@ -39,7 +39,7 @@ public class PhotoBoardController {
 	}
 
 	@RequestMapping(value = "/photo/view", method = RequestMethod.GET)
-	public String doUpdate() {
+	public String doUpdate(@ModelAttribute PhotoBoardVO pb, Model model) {
 		return "photo/view";
 	}
 

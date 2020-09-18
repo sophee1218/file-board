@@ -45,11 +45,40 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 	
 	@Override
 	public int updatePhotoBoard(PhotoBoardVO pb, MultipartFile file) {
-		
-		
-		
-		return 0;
-	}
+	      if(pb.getPbPhotoPath() == null) {
+	          String orgFileName = file.getOriginalFilename();
+	          String extName = orgFileName.substring(orgFileName.lastIndexOf("."));
+	          String fileName = System.nanoTime() + extName;
+	          pb.setPbPhotoName(orgFileName);
+	          pb.setPbPhotoPath(fileName);
+	          int cnt = pbdao.updatePhotoBoard(pb);
+	          if(cnt == 1) {
+	             File f = new File(uploadPath + fileName);
+	             try {
+	                file.transferTo(f);
+	             } catch (IllegalStateException e) {
+	                e.printStackTrace();
+	             } catch (IOException e) {
+	                e.printStackTrace();
+	             }
+	          }
+	          return cnt;
+	       }
+	       if(pb.getPbPhotoPath() != null) {
+	          int cnt = pbdao.updatePhotoBoard(pb);
+	          if(cnt == 1) {
+	             File f = new File(uploadPath + pb.getPbPhotoPath());
+	             try {
+	                file.transferTo(f);
+	             } catch (IllegalStateException e) {
+	                e.printStackTrace();
+	             } catch (IOException e) {
+	                e.printStackTrace();
+	             }
+	          }
+	       }
+	       return 0;
+	    }
 	
 	@Override
 	public List<PhotoBoardVO> selectPhotoBoardList(PhotoBoardVO pb, Model model) {
