@@ -11,4 +11,7 @@ public interface PhotoBoardDAO {
 	int insertPhotoBoard(PhotoBoardVO pb, MultipartFile file);
 	List<PhotoBoardVO> selectPhotoBoardList(PhotoBoardVO pb);
 	int selectPhotoBoardCount(PhotoBoardVO pb);
+	int deletePhotoBoards(int[] pbNums);
+	List<PhotoBoardVO> selectPhotoBoardsForDelete(int[] pbNums);
+	int updatePhotoBoard(PhotoBoardVO pb, MultipartFile file);
 }

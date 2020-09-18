@@ -10,4 +10,6 @@ import com.file.board.vo.PhotoBoardVO;
 public interface PhotoBoardService {
 	int insertPhotoBoard(PhotoBoardVO pb,MultipartFile file);
 	List<PhotoBoardVO> selectPhotoBoardList(PhotoBoardVO pb, Model model);
+	int deletePhotoBoards(int[] pbNums);
+	int updatePhotoBoard(PhotoBoardVO pb,MultipartFile file);
 }

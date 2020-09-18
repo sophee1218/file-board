@@ -41,8 +41,16 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 		}
 		return cnt;
 	}
-
-
+	
+	
+	@Override
+	public int updatePhotoBoard(PhotoBoardVO pb, MultipartFile file) {
+		
+		
+		
+		return 0;
+	}
+	
 	@Override
 	public List<PhotoBoardVO> selectPhotoBoardList(PhotoBoardVO pb, Model model) {
 
@@ -54,8 +62,11 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 		page.setEndNum(endNum);
 		
 		int totalCnt = pbdao.selectPhotoBoardCount(pb);
-		page.setTotalCnt(totalCnt);
+		page.setTotalCnt(totalCnt);    
 		int totalPageSize = totalCnt/10;
+		if(totalCnt % 10 !=0) {
+			totalPageSize += 1;
+		}
 		int startBlock = (page.getPageNum()-1)/10*10+1;
 		int endBlock = startBlock + (10-1);
 		if(endBlock>totalPageSize) {
@@ -70,6 +81,28 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 		model.addAttribute("pbList",pbdao.selectPhotoBoardList(pb));
 		return null;
 	}
+
+
+	@Override
+	public int deletePhotoBoards(int[] pbNums) {
+		List<PhotoBoardVO> pbList = pbdao.selectPhotoBoardsForDelete(pbNums);
+		if(!pbList.isEmpty()) {
+			for(PhotoBoardVO pb:pbList) {
+				String fileName = pb.getPbPhotoPath();
+				File f = new File(uploadPath+fileName);
+				if(f.exists()) {
+					f.delete();
+				}
+			}
+		}
+		return pbdao.deletePhotoBoards(pbNums);
+	}
+
+
+
+
+
+
 
 	
 	
