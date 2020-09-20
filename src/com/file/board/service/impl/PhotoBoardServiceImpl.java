@@ -18,7 +18,7 @@ import com.file.board.vo.PhotoBoardVO;
 @Service
 public class PhotoBoardServiceImpl implements PhotoBoardService {
 
-	private final String uploadPath = "C:\\java_study\\workspace2\\file-board\\WebContent\\resources\\";
+	private final String uploadPath = "C:\\Users\\m2lod\\git\\file-board\\WebContent\\resources\\";
 	@Autowired
 	private PhotoBoardDAO pbdao;
 	
@@ -125,6 +125,15 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 			}
 		}
 		return pbdao.deletePhotoBoards(pbNums);
+	}
+
+
+	@Override
+	public PhotoBoardVO selectPhotoBoard(PhotoBoardVO pb)
+	{
+		
+		
+		return pbdao.selectPhotoBoard(pb);
 	}
 
 

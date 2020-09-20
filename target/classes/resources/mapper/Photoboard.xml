@@ -88,6 +88,6 @@
 	</update>
 	
 	<select id="selectPhotoBoard" parameterType="pb" resultType="pb">
-		slelect * from photo_board where pb_num = ${pbNum}
+		select * from photo_board where pb_num = ${pbNum}
 	</select>
 </mapper>

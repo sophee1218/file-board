@@ -22,7 +22,10 @@ public class PhotoBoardController {
 	@RequestMapping(value = "/photo/list", method = RequestMethod.GET)
 	public String goList(@ModelAttribute PhotoBoardVO pb, Model model) {
 		System.out.println(pb);
-
+		if(pb.getPage()==null) {
+			pb.setPage(new PageVO());
+			pb.getPage().setPageNum(1);
+		}
 		pbService.selectPhotoBoardList(pb, model);
 		return "photo/list";
 	}
@@ -40,6 +43,8 @@ public class PhotoBoardController {
 
 	@RequestMapping(value = "/photo/view", method = RequestMethod.GET)
 	public String doUpdate(@ModelAttribute PhotoBoardVO pb, Model model) {
+	
+		model.addAttribute("pb",pbService.selectPhotoBoard(pb));
 		return "photo/view";
 	}
 
