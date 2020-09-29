@@ -40,7 +40,7 @@
 					<tr>
 						<td><input type="checkbox" name="pbNums" value="${pb.pbNum}"></td>
 						<td>${pb.pbNum}</td>
-						<td>${pb.pbTitle}</td>
+						<td><a href="/photo/view?pbNum=${pb.pbNum}">${pb.pbTitle}</a></td>
 						<td>
 							<c:if test="${pb.pbPhotoPath!=null }">
 								<a href="/resources/${pb.pbPhotoPath}" target="blank"><img src="/resources/${pb.pbPhotoPath}" width="50px" onmouseover="showImg(this.src)" onmouseout="offImg()"></a>
@@ -55,7 +55,7 @@
 		<button>삭제</button>
 	</form>
 	
-
+	
 	
 	<br>	
 	<c:forEach begin="${page.startBlock}" end="${page.endBlock}" var="idx">
@@ -63,7 +63,7 @@
 	</c:forEach>
 	<a href="/photo/list?page.pageNum=${page.pageNum+1}">▶</a>
 	<a href="/photo/write"><button>글쓰기</button></a>
-	<a href="/photo/view"><button>조회</button></a>
+	
 </div>
 <img src="" style="display:none" id="sImg">
 <script>
